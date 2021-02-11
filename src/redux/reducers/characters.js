@@ -5,7 +5,7 @@ import {
 
 
 const initialStoreSlice = {
-    characterURL: 'No character'
+    characterURL: ''
 }
 
 // A reducer normally serves the purpose of handling a data section of the store, and starts with the initial state,
@@ -25,7 +25,7 @@ export default function characters (storeSlice = initialStoreSlice, action) {
         case CHARACTER_CHANGE_ERROR:
             return {
                 ...storeSlice,
-                characterURL: 'Character not selected'
+                characterURL: ''
             }
         
         default: return storeSlice

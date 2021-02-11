@@ -30,7 +30,6 @@ function App() {
   useEffect(() => {
     const queryData = async () => {
       const resp = await axios.get('https://swapi.dev/api/films/', config);
-      console.log('DATA:', resp.data.results[0]);
       setChars(resp.data.results[0].characters);
     }
 
