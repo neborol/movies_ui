@@ -5,6 +5,10 @@ import { useSelector } from 'react-redux';
 
 
 const MovieList = () => {
+
+    const URL = useSelector(store => store.characters.characterURL);
+    console.log('PassedURL', URL);
+
     return (
         <div className="movieList-container">
            <h3>Movie List:</h3>

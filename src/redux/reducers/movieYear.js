@@ -5,7 +5,7 @@ import {
 
 
 const initialStoreSlice = {
-    orientation: 'horizontal'
+    movieYear: '0000'
 }
 
 // A reducer normally serves the purpose of handling a data section of the store, and starts with the initial state,
@@ -15,17 +15,17 @@ export default function movieYear (storeSlice = initialStoreSlice, action) {
 
     switch(type) {
 
-        case NAVIGATION_ORIENTATION:
+        case MOVIE_YEAR_CHANGE:
             return {
                 ...storeSlice,
-                orientation: payload
+                movieYear: payload
             }
 
 
-        case NAVIGATION_ERROR:
+        case MOVIE_YEAR_CHANGE_ERROR:
             return {
                 ...storeSlice,
-                orientation: 'horizontal'
+                movieYear: '0000'
             }
         
         default: return storeSlice

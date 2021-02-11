@@ -4,20 +4,19 @@ import {
 } from './types';
 
 // Broadcast Character change
-export const changeCharacter = (characterName) => async dispatch => {
-
+export const changeCharacter = (characterURL) => async dispatch => {
     // Fragile code that can break because of side effects, hence try-catch block.
-     try {
+    try {
          dispatch({
              type: CHARACTER_CHANGE, // Dispatch an action to let the app know that the character name has changed
-             payload: characterName
+             payload: characterURL
          });
-     } 
-     catch (err) {
+    } 
+    catch (err) {
          // In the case where the character change causes an error. 
          dispatch({
              type: CHARACTER_CHANGE_ERROR
          });
-     }
+    }
  }
  
