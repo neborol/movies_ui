@@ -5,7 +5,10 @@ import {
 
 
 const initialStoreSlice = {
-    movieYear: '0000'
+    movieYearData: {
+        name: 'No Year Name',
+        year: '0000'
+    }
 }
 
 // A reducer normally serves the purpose of handling a data section of the store, and starts with the initial state,
@@ -18,14 +21,17 @@ export default function movieYear (storeSlice = initialStoreSlice, action) {
         case MOVIE_YEAR_CHANGE:
             return {
                 ...storeSlice,
-                movieYear: payload
+                movieYearData: payload
             }
 
 
         case MOVIE_YEAR_CHANGE_ERROR:
             return {
                 ...storeSlice,
-                movieYear: '0000'
+                movieYearData: {
+                    name: 'No Year Name',
+                    year: '0000'
+                }
             }
         
         default: return storeSlice

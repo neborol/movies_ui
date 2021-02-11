@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 
 const MovieYear = () => {
+    const yearData = useSelector(store => store.movieYear.movieYearData);
+    // const [movies, setMovies] = useState({});
+
+
+
     return (
         <div className="movieYear-container">
-           <h3>Movie Year released:</h3>
-           <p>Display of movie year</p>
+           <h3>Name / Year last Movie :</h3>
+    <div>{ yearData.name } - { yearData.year }</div>
            <hr style={{width: '200px', marginInlineStart: 0}} />
         </div>
     )

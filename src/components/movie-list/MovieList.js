@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeMovieYear } from '../../redux/actions/movieYear';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { formatYear } from '../../utilities/helpers';
 import './movieList.css';
 
 
@@ -18,13 +20,21 @@ const MovieList = () => {
         }
     }
 
+    const dispatch = useDispatch();
+
     useEffect(async () => {
         if (URL) {
             const resp = await axios.get(URL, config);
             console.log(resp.data);
+            const yearData = {
+                name: resp.data.name,
+                year: formatYear(resp.data.edited)
+            }
             setMovies(resp.data.films); // Update the available films
+            dispatch(changeMovieYear(yearData)); // Broadcast movie year data
         }
     }, [URL]);  
+
 
     return (
         <div className="movieList-container">
