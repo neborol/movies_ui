@@ -12,9 +12,7 @@ import MovieYear from './components/movie-year/MovieYear';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
-import { changeCharacter } from './redux/actions/characters';
-import { changeMovieList } from './redux/actions/movieList';
-import { changeMovieYear } from './redux/actions/movieYear';
+import Spinner from './utilities/Spinner';
 
 import './App.css';
 
@@ -26,14 +24,22 @@ function App() {
   }
 
   const [chars, setChars] = useState([]);
+  const [loading, setLoading] = useState(true); // true = start spinner
 
   useEffect(() => {
-    const queryData = async () => {
-      const resp = await axios.get('https://swapi.dev/api/films/', config);
-      setChars(resp.data.results[0].characters);
+    const fetchData = async () => {
+      try {
+        const resp = await axios.get('https://swapi.dev/api/films/', config);
+        setChars(resp.data.results[0].characters);
+        setLoading(false); // Turn off the loader
+      } catch (error) {
+        setLoading(false); // Turn off the loader
+        alert('Something went wrong with getting initial data. Please try again.');
+      }
     }
 
-    queryData();
+    fetchData();
+    
   }, []);
 
   
@@ -44,8 +50,8 @@ function App() {
       <CssBaseline />
       <Container maxWidth="xl">
           <Navbar />
-            <hr />
             <div className="main-content">
+            { loading && (<Spinner loading={loading}/>) }
               <h1>Movie Sellector Widget</h1>
               <div className="movie-widgets">
                 <Character characters={chars}/>

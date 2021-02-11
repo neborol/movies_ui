@@ -11,7 +11,7 @@ const override = css`
 
 function Spinner({loading}) {
     return (
-        <div>
+        <div className="spinner-container">
             <ClipLoader
                 css={override}
                 size={150}

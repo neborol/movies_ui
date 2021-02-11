@@ -3,6 +3,7 @@ import { extractCharacter } from '../../utilities/helpers';
 
 import { useDispatch } from 'react-redux';
 import { changeCharacter } from '../../redux/actions/characters';
+import { dataLoading } from '../../redux/actions/characters';
 import { useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +12,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +35,7 @@ const Character = ({characters}) => {
     const handleChange = (event) => {
         setCharacter(event.target.value);
         dispatch(changeCharacter(event.target.value)); // Dispatch the changed value
+        dispatch(dataLoading(true)); // Dispatch the dataLoading event, so as to start the spinner
     };
 
 

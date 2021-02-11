@@ -1,11 +1,13 @@
 import { 
     CHARACTER_CHANGE,
-    CHARACTER_CHANGE_ERROR
+    CHARACTER_CHANGE_ERROR,
+    DATA_LOADING
  } from '../actions/types';
 
 
 const initialStoreSlice = {
-    characterURL: ''
+    characterURL: '',
+    spinnerLoading: false
 }
 
 // A reducer normally serves the purpose of handling a data section of the store, and starts with the initial state,
@@ -19,6 +21,12 @@ export default function characters (storeSlice = initialStoreSlice, action) {
             return {
                 ...storeSlice,
                 characterURL: payload
+            }
+
+        case DATA_LOADING:
+            return {
+                ...storeSlice,
+                spinnerLoading: payload
             }
 
 
