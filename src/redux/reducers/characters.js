@@ -6,7 +6,10 @@ import {
 
 
 const initialStoreSlice = {
-    characterURL: '',
+    characterObject: {
+        char_name: '',
+        char_films: []
+    },
     spinnerLoading: false
 }
 
@@ -20,7 +23,7 @@ export default function characters (storeSlice = initialStoreSlice, action) {
         case CHARACTER_CHANGE:
             return {
                 ...storeSlice,
-                characterURL: payload
+                characterObject: payload
             }
 
         case DATA_LOADING:
@@ -33,7 +36,10 @@ export default function characters (storeSlice = initialStoreSlice, action) {
         case CHARACTER_CHANGE_ERROR:
             return {
                 ...storeSlice,
-                characterURL: ''
+                characterObject: {
+                    char_name: '',
+                    char_films: []
+                }
             }
         
         default: return storeSlice

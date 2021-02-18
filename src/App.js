@@ -13,7 +13,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
 import Spinner from './utilities/Spinner';
+import { useDispatch } from 'react-redux';
+import { yearChange } from './redux/actions/movieYear';
 
+import { formatYear } from './utilities/helpers';
 import './App.css';
 
 function App() {
@@ -26,12 +29,16 @@ function App() {
   const [chars, setChars] = useState([]);
   const [loading, setLoading] = useState(true); // true = start spinner
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resp = await axios.get('https://swapi.dev/api/films/', config);
-        setChars(resp.data.results[0].characters);
+        // Fetch initial data that would list the characters and then take it from there
+        const resp = await axios.get('https://swapi.dev/api/people/', config);
+        setChars(resp.data.results);
         setLoading(false); // Turn off the loader
+        dispatch(yearChange(formatYear( resp.data.results[resp.data.results.length - 1].created)))
       } catch (error) {
         setLoading(false); // Turn off the loader
         alert('Something went wrong with getting initial data. Please try again.');
@@ -42,7 +49,6 @@ function App() {
     
   }, []);
 
-  
 
 
   return (
